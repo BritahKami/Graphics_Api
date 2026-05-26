@@ -115,13 +115,45 @@ function update(){
     if(keys["ArrowLeft"]) player.x -= player.speed;
     if(keys["ArrowRight"]) player.x += player.speed;
 
+    // Prevent player from leaving canvas
+    if(player.x - player.radius < 0){
+        player.x = player.radius;
+    }
+
+    if(player.x + player.radius > canvas.width){
+        player.x = canvas.width - player.radius;
+    }
+
+    if(player.y - player.radius < 0){
+        player.y = player.radius;
+    }
+
+    if(player.y + player.radius > canvas.height){
+        player.y = canvas.height - player.radius;
+    }
 
     if(enemy.x < player.x) enemy.x += enemy.speed;
     if(enemy.x > player.x) enemy.x -= enemy.speed;
 
     if(enemy.y < player.y) enemy.y += enemy.speed;
     if(enemy.y > player.y) enemy.y -= enemy.speed;
+ 
+    // Prevent enemy from leaving canvas
+    if(enemy.x - enemy.radius < 0){
+        enemy.x = enemy.radius;
+    }
 
+    if(enemy.x + enemy.radius > canvas.width){
+        enemy.x = canvas.width - enemy.radius;
+    }
+
+    if(enemy.y - enemy.radius < 0){
+        enemy.y = enemy.radius;
+    }
+
+    if(enemy.y + enemy.radius > canvas.height){
+        enemy.y = canvas.height - enemy.radius;
+    }
 
     walls.forEach(wall=>{
 
@@ -270,3 +302,5 @@ function gameLoop(){
 }
 
 gameLoop();
+
+
